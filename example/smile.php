@@ -53,5 +53,4 @@ $container->place(new Position(0, 0), $border);
 $container->place(new Position(7, 8), $smile);
 $container->render($buffer);
 
-
 echo $buffer->render();

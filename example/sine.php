@@ -43,12 +43,6 @@ $container->place(new Position(0, 20), $series1);
 $container->place(new Position(0, 20), $series2);
 $container->place(new Position(0, 10), $series3);
 $container->place(new Position(0, 32), new Text(str_repeat('-', 200)));
-$container->place(new Position(0, 33), new Text(
-    implode('', array_map(fn (int $num) => 0 === $num % 10 ? '|' : ' ', range(0, 200)))
-));
-$container->place(new Position(0, 35), new Text(
-    implode('', array_map(fn (int $num) => 0 === $num % 10 ? $num / 10 : ' ', range(0, 200)))
-));
 
 $subLayer = new Container(100, 100);
 $subLayer->place(new Position(0, 0), new Text('Hello'));

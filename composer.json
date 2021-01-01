@@ -1,0 +1,35 @@
+{
+    "name": "dantleech/console-canvas",
+    "description": "Library for rendering stuff on the console",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Leech",
+            "email": "daniel@dantleech.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "DTL\\ConsoleCanvas\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DTL\\ConsoleCanvas\\Tests\\": "tests/",
+            "DTL\\ConsoleCanvas\\Example\\": "example/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    }
+}

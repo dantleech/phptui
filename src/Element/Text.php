@@ -11,7 +11,7 @@ use DTL\ConsoleCanvas\Rune;
 
 final class Text implements Element
 {
-    public function __construct(private string $text)
+    public function __construct(public string $text)
     {
     }
 

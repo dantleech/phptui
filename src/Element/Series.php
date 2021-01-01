@@ -13,13 +13,13 @@ use DTL\ConsoleCanvas\Style;
 
 final class Series implements Element
 {
-    private Brush $brush;
-    private Style $style;
+    public Brush $brush;
+    public Style $style;
 
     public function __construct(
-        private array $values,
-        private int $density = 10,
-        private int $step = 1,
+        public array $values,
+        public int $density = 10,
+        public int $step = 1,
         ?Brush $brush = null,
         ?Style $style = null,
     )

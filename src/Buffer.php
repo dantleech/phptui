@@ -15,6 +15,8 @@ class Buffer
 
     private ColorCodes $colorCodes;
 
+    private bool $clear = false;
+
     public function __construct(
         private int $width,
         private int $height,
@@ -49,6 +51,11 @@ class Buffer
         $currentStyle = Color::none();
         $grid = $this->grid;
 
+        if ($this->clear) {
+            $output[] = "\x1b[" . $this->height . "A";
+            $this->clear = false;
+        }
+
         for ($y = 0; $y < $this->height; $y++) {
             $line = '';
 
@@ -60,7 +67,7 @@ class Buffer
                 }
                 $cell = $grid[$y][$x];
 
-                if (null === $currentStyle || $cell->style()->fg() != $currentStyle) {
+                if ($cell->style()->fg() != $currentStyle) {
                     $currentStyle = $cell->style()->fg();
                     $line .= $this->colorCodes->render($currentStyle);
                 }
@@ -81,6 +88,7 @@ class Buffer
     public function clear(): void
     {
         $this->grid = [];
+        $this->clear = true;
     }
 
     private function putCell(Position $position, Cell $cell): void

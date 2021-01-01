@@ -12,13 +12,13 @@ use DTL\ConsoleCanvas\Style;
 
 class Line implements Element
 {
-    private Brush $brush;
-    private Style $style;
+    public Brush $brush;
+    public Style $style;
 
     public function __construct(
-        private Position $start,
-        private Position $end,
-        private int $density = 100,
+        public Position $start,
+        public Position $end,
+        public int $density = 100,
         ?Brush $brush = null,
         ?Style $style = null
     )

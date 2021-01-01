@@ -12,13 +12,13 @@ use DTL\ConsoleCanvas\Stroke;
 
 final class Rectangle implements Element
 {
-    private Brush $brush;
-    private Brush $fillBrush;
+    public Brush $brush;
+    public Brush $fillBrush;
 
     public function __construct(
-        private float $width,
-        private float $height,
-        private bool $fill = false,
+        public float $width,
+        public float $height,
+        public bool $fill = false,
         ?Brush $brush = null,
         ?Brush $fillBrush = null,
     )

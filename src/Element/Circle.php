@@ -13,10 +13,10 @@ use DTL\ConsoleCanvas\Position;
 
 final class Circle implements Element
 {
-    private Brush $brush;
+    public Brush $brush;
 
     public function __construct(
-        private float $radius,
+        public float $radius,
         ?Brush $brush = null,
     )
     {

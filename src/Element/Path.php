@@ -12,12 +12,12 @@ use DTL\ConsoleCanvas\Style;
 
 final class Path implements Element
 {
-    private Brush $brush;
-    private Style $style;
+    public Brush $brush;
+    public Style $style;
 
     public function __construct(
-        private Positions $positions,
-        private int $density = 100,
+        public Positions $positions,
+        public int $density = 100,
         ?Brush $brush = null,
         ?Style $style = null,
     )

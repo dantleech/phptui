@@ -38,25 +38,30 @@ $series3 = new Series(
     style: new Style(fg: Color::magenta())
 );
 
-$container->addAt(new Position(0, 0), new Text(str_repeat('-', 200)));
-$container->addAt(new Position(0, 20), $series1);
-$container->addAt(new Position(0, 20), $series2);
-$container->addAt(new Position(0, 10), $series3);
-$container->addAt(new Position(0, 32), new Text(str_repeat('-', 200)));
-$container->addAt(new Position(0, 33), new Text(
+$container->place(new Position(0, 0), new Text(str_repeat('-', 200)));
+$container->place(new Position(0, 20), $series1);
+$container->place(new Position(0, 20), $series2);
+$container->place(new Position(0, 10), $series3);
+$container->place(new Position(0, 32), new Text(str_repeat('-', 200)));
+$container->place(new Position(0, 33), new Text(
     implode('', array_map(fn (int $num) => 0 === $num % 10 ? '|' : ' ', range(0, 200)))
 ));
-$container->addAt(new Position(0, 35), new Text(
+$container->place(new Position(0, 35), new Text(
     implode('', array_map(fn (int $num) => 0 === $num % 10 ? $num / 10 : ' ', range(0, 200)))
 ));
 
 $subLayer = new Container(100, 100);
-$subLayer->addAt(new Position(0, 0), new Text('Hello'));
-$container->addAt(new Position(0, 0), $subLayer);
+$subLayer->place(new Position(0, 0), new Text('Hello'));
+$container->place(new Position(0, 0), $subLayer);
 
 $sleep = 10_000;
 $offset = 0;
-$canvas->clear();
-$container->render($canvas);
 
-echo $canvas->render();
+while (true) {
+    $offset += 1;
+    $canvas->clear();
+    $container->render($canvas);
+    $container->update($series1, fn (Series $series) => $series->values = $wave($offset));
+    echo $canvas->render();
+    usleep($sleep);
+}

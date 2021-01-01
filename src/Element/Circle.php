@@ -11,6 +11,7 @@ use DTL\ConsoleCanvas\Buffer;
 use DTL\ConsoleCanvas\Color;
 use DTL\ConsoleCanvas\Element;
 use DTL\ConsoleCanvas\Position;
+use DTL\ConsoleCanvas\Style;
 
 final class Circle implements Element
 {
@@ -19,7 +20,9 @@ final class Circle implements Element
     public function __construct(
         public float $radius,
         ?Brush $brush = null,
+        public ?Style $style = null,
         public ?Brush $fillBrush = null,
+        public ?Style $fillStyle = null,
     )
     {
         $this->brush = $brush ?: new BlockBrush();
@@ -45,7 +48,8 @@ final class Circle implements Element
         foreach ($positions as $index => $position) {
             $buffer->print(
                 $position,
-                $strokes[$index]
+                $strokes[$index],
+                $this->style
             );
         }
     }
@@ -59,7 +63,8 @@ final class Circle implements Element
             for ($x = $range->start()->x() + 1; $x < $range->end()->x(); $x++) {
                 $buffer->print(
                     new Position($x, $range->start()->y()),
-                    $this->fillBrush->stroke(new Stroke())
+                    $this->fillBrush->stroke(new Stroke()),
+                    $this->fillStyle
                 );
             }
 

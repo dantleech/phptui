@@ -52,6 +52,9 @@ class Line implements Element
 
     private function series(float $start, float $end, int $nbPoints): array
     {
+        if (!$nbPoints) {
+            return [];
+        }
         $delta = ($end - $start) / $nbPoints;
 
         return array_reduce(range(0, $nbPoints), function (array $points, int $index) use ($start, $delta) {

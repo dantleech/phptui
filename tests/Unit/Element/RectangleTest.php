@@ -49,7 +49,7 @@ EOT
         ];
 
         yield 'filled rectangle' => [
-            new Rectangle(width: 10, height: 2, fill: true),
+            new Rectangle(width: 10, height: 2, fillBrush: new BlockBrush()),
             <<<EOT
 ███████████
 ███████████
@@ -58,7 +58,7 @@ EOT
         ];
 
         yield 'filled rectangle with fill brush' => [
-            new Rectangle(width: 10, height: 2, fill: true, brush: new LineBrush()),
+            new Rectangle(width: 10, height: 2, fillBrush: new BlockBrush(), brush: new LineBrush()),
             <<<EOT
 ┌─────────┐
 │█████████│

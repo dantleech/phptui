@@ -9,28 +9,27 @@ use DTL\ConsoleCanvas\Element;
 use DTL\ConsoleCanvas\Position;
 use DTL\ConsoleCanvas\Positions;
 use DTL\ConsoleCanvas\Stroke;
+use DTL\ConsoleCanvas\Style;
 
 final class Rectangle implements Element
 {
     public Brush $brush;
-    public Brush $fillBrush;
 
     public function __construct(
-        public float $width,
-        public float $height,
-        public bool $fill = false,
+        public int $width,
+        public int $height,
         ?Brush $brush = null,
-        ?Brush $fillBrush = null,
+        private ?Brush $fillBrush = null,
+        private ?Style $fillStyle = null,
     )
     {
         $this->brush = $brush ?: new BlockBrush();
-        $this->fillBrush = $fillBrush ?: new BlockBrush();
     }
 
     public function render(Buffer $buffer): void
     {
-        $this->renderStroke($buffer);
         $this->renderFill($buffer);
+        $this->renderStroke($buffer);
         $this->renderCorners($buffer);
     }
 
@@ -48,7 +47,7 @@ final class Rectangle implements Element
 
     private function renderFill(Buffer $buffer): void
     {
-        if (!$this->fill) {
+        if (null === $this->fillBrush) {
             return;
         }
 
@@ -58,9 +57,10 @@ final class Rectangle implements Element
 
         for ($y = 1; $y < $this->height; $y++) {
             $line = new Line(
-                new Position(1, $y),
+                new Position(0, $y),
                 new Position($this->width - 1, $y),
                 brush: $this->fillBrush,
+                style: $this->fillStyle
             );
             $line->render($buffer);
         }

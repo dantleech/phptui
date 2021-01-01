@@ -54,8 +54,10 @@ $offset = 0;
 while (true) {
     $offset += 1;
     $canvas->clear();
+
     $container->render($canvas);
     $container->update($series1, fn (Series $series) => $series->values = $wave($offset));
+
     echo $canvas->render();
     usleep($sleep);
 }

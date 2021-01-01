@@ -43,7 +43,7 @@ class Line implements Element
         foreach ($xSeries as $index => $x) {
             $y = $ySeries[$index];
 
-            $buffer->print(new Position($x, $y), $this->brush->stroke(new Stroke(angle: 360 - $angle)), $this->style);
+            $buffer->print(Position::fromFloat($x, $y), $this->brush->stroke(new Stroke(angle: 360 - $angle)), $this->style);
         }
     }
 

@@ -101,7 +101,7 @@ class Buffer
             return;
         }
 
-        $this->grid[(int)round($position->y())][(int)round($position->x())] = $cell;
+        $this->grid[$position->y()][$position->x()] = $cell;
     }
 
     public function merge(Position $position, Buffer $buffer): void

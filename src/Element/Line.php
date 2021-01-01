@@ -18,7 +18,6 @@ class Line implements Element
     public function __construct(
         public Position $start,
         public Position $end,
-        public int $density = 100,
         ?Brush $brush = null,
         ?Style $style = null
     )
@@ -29,8 +28,12 @@ class Line implements Element
 
     public function render(Buffer $buffer): void
     {
-        $xSeries = $this->series($this->start->x(), $this->end->x());
-        $ySeries = $this->series($this->start->y(), $this->end->y());
+        $nbPoints = max(
+            self::nbPoints($this->start->x(), $this->end->x()),
+            self::nbPoints($this->start->y(), $this->end->y()),
+        );
+        $xSeries = $this->series($this->start->x(), $this->end->x(), $nbPoints);
+        $ySeries = $this->series($this->start->y(), $this->end->y(), $nbPoints);
 
         $lastX = null;
         $lastY = null;
@@ -47,13 +50,20 @@ class Line implements Element
         }
     }
 
-    private function series(float $start, float $end): array
+    private function series(float $start, float $end, int $nbPoints): array
     {
-        $delta = ($end - $start) / $this->density;
+        $delta = ($end - $start) / $nbPoints;
 
-        return array_reduce(range(0, $this->density), function (array $points, int $index) use ($start, $delta) {
+        return array_reduce(range(0, $nbPoints), function (array $points, int $index) use ($start, $delta) {
             $points[] = $start + ($delta * $index);
             return $points;
         }, []);
+    }
+
+    private static function nbPoints(float $n1, float $n2): int
+    {
+        $start = min($n1, $n2);
+        $end = max($n1, $n2);
+        return (int)round($end - $start);
     }
 }

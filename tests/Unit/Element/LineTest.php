@@ -38,7 +38,7 @@ EOT
         ];
 
         yield 'diagonal' => [
-            new Line(new Position(0, 0), new Position(3, 3), density: 4),
+            new Line(new Position(0, 0), new Position(3, 3)),
             <<<EOT
 ...╱
 ..╱.

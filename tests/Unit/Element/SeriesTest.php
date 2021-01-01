@@ -26,7 +26,7 @@ class SeriesTest extends ElementTestCase
         yield [
             new Series([
                 0, 1, 2, 1, 0, 1, 2, 1, 0
-            ], density: 5),
+            ]),
             <<<EOT
   █   █  
  █ █ █ █ 
@@ -37,7 +37,6 @@ EOT
         yield 'with style' => [
             new Series(
                 [0, 1, 2, 1, 0, 1, 2, 1, 0],
-                density: 5,
                 style: new Style(fg: Color::red())
             ),
             <<<EOT

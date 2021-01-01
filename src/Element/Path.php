@@ -17,7 +17,6 @@ final class Path implements Element
 
     public function __construct(
         public Positions $positions,
-        public int $density = 100,
         ?Brush $brush = null,
         ?Style $style = null,
     )
@@ -39,7 +38,6 @@ final class Path implements Element
             (new Line(
                 $start,
                 $end,
-                density: $this->density,
                 brush: $this->brush,
                 style: $this->style,
             ))->render($canvas,);

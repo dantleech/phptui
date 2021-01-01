@@ -18,7 +18,6 @@ final class Series implements Element
 
     public function __construct(
         public array $values,
-        public int $density = 10,
         public int $step = 1,
         ?Brush $brush = null,
         ?Style $style = null,
@@ -40,7 +39,6 @@ final class Series implements Element
 
         (new Path(
             new Positions($positions),
-            density: $this->density,
             brush: $this->brush,
             style: $this->style,
         ))->render($canvas);

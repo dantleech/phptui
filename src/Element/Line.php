@@ -10,6 +10,24 @@ use DTL\ConsoleCanvas\Position;
 use DTL\ConsoleCanvas\Stroke;
 use DTL\ConsoleCanvas\Style;
 
+/**
+ * Render a line in the grid.
+ *
+ *
+ * From (x:0,y:0) to (x:0,y:1)
+ *
+ *    +---+---+---+---+
+ *   4|   |   |   |   |
+ *    +---+---+---+---+
+ *   3|   |   |   |   |
+ * Y  +---+---+---+---+
+ *   2| x |   |   |   |
+ *    +---+---+---+---+
+ *   1| x |   |   |   |
+ *    +---+---+---+---+
+ *      1   2   3  
+ *            X
+ */
 class Line implements Element
 {
     public Brush $brush;
@@ -19,7 +37,7 @@ class Line implements Element
         public Position $start,
         public Position $end,
         ?Brush $brush = null,
-        ?Style $style = null
+        ?Style $style = null,
     )
     {
         $this->brush = $brush ?: new LineBrush();
@@ -46,27 +64,28 @@ class Line implements Element
         foreach ($xSeries as $index => $x) {
             $y = $ySeries[$index];
 
-            $buffer->print(Position::fromFloat($x, $y), $this->brush->stroke(new Stroke(angle: 360 - $angle)), $this->style);
+            $buffer->print(
+                new Position($x, $y),
+                $this->brush->stroke(new Stroke(angle: 360 - $angle)),
+                $this->style
+            );
         }
     }
 
-    private function series(float $start, float $end, int $nbPoints): array
+    private function series(int $start, int $end, int $nbPoints): array
     {
-        if (!$nbPoints) {
-            return [];
-        }
         $delta = ($end - $start) / $nbPoints;
 
-        return array_reduce(range(0, $nbPoints), function (array $points, int $index) use ($start, $delta) {
-            $points[] = $start + ($delta * $index);
+        return array_reduce(range(1, $nbPoints), function (array $points, int $index) use ($start, $delta) {
+            $points[] = round(($start + ($delta * $index)));
             return $points;
-        }, []);
+        }, [$start]);
     }
 
-    private static function nbPoints(float $n1, float $n2): int
+    private static function nbPoints(int $n1, int $n2): int
     {
         $start = min($n1, $n2);
         $end = max($n1, $n2);
-        return (int)round($end - $start);
+        return ($end - $start) + 1;
     }
 }

@@ -37,7 +37,7 @@ class Buffer
             }
         }
 
-        return new self($length, count($lines), $colorCodes);
+        return new self($length, count($lines) + 1, $colorCodes);
     }
 
     public function print(Position $position, Rune $rune, ?Style $style = null): void
@@ -56,10 +56,10 @@ class Buffer
             $this->clear = false;
         }
 
-        for ($y = $this->height - 1; $y >= 0; $y--) {
+        for ($y = $this->height - 1; $y > 0; $y--) {
             $line = '';
 
-            for ($x = 0; $x < $this->width; $x++) {
+            for ($x = 1; $x <= $this->width; $x++) {
 
                 if (!isset($grid[$y][$x])) {
                     $line .= ' ';

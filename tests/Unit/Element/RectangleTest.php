@@ -30,12 +30,12 @@ class RectangleTest extends ElementTestCase
     public function provideRender(): Generator
     {
         yield 'rectangle' => [
-            new Rectangle(width: 2, height: 3, brush: new BlockBrush()),
+            new Rectangle(width: 3, height: 3, brush: new BlockBrush()),
             <<<EOT
-███
-█ █
-█ █
-███
+....
+███.
+█ █.
+███.
 EOT
         ];
 

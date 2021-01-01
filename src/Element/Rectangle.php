@@ -28,9 +28,9 @@ final class Rectangle implements Element
 
     public function render(Buffer $buffer): void
     {
-        $this->renderFill($buffer);
+        //$this->renderFill($buffer);
         $this->renderStroke($buffer);
-        $this->renderCorners($buffer);
+        //$this->renderCorners($buffer);
     }
 
     private function renderStroke(Buffer $buffer): void
@@ -38,9 +38,6 @@ final class Rectangle implements Element
         $path = new Path(new Positions([
             new Position(0, 0),
             new Position(0, $this->height),
-            new Position($this->width, $this->height),
-            new Position($this->width, 0),
-            new Position(0, 0),
         ]), brush: $this->brush);
         $path->render($buffer);
     }

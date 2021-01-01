@@ -44,11 +44,11 @@ EOT
         yield 'lines' => [
             new Circle(radius: 2, brush: new LineBrush()),
             <<<EOT
- ╱── 
-│╱ ╲╲
-│   │
-╲╲ ╱│
- ──╱ 
+.──╲.
+╱╱.╲│
+│...│
+│╲.╱╱
+.╲──.
 EOT
         ];
     }

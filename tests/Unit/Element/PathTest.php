@@ -50,11 +50,11 @@ EOT
                 [ 0, 0 ], [ 4, 4 ]
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
-x....
-.x...
-..x..
-...x.
 ....x
+...x.
+..x..
+.x...
+x....
 EOT
         ];
         yield 'triangle' => [
@@ -62,10 +62,10 @@ EOT
                 [ 0, 0 ], [ 3, 0 ], [ 3, 3 ], [ 0, 0 ]
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
-xxxx.
-.x.x.
-..xx.
 ...x.
+..xx.
+.x.x.
+xxxx.
 EOT
         ];
 

@@ -51,4 +51,9 @@ final class Container implements Element
             'Element "%s" not found', $hash
         ));
     }
+
+    public static function fromBuffer(Buffer $buffer): self
+    {
+        return new self($buffer->width(), $buffer->height());
+    }
 }

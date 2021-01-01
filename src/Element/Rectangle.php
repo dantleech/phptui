@@ -68,7 +68,7 @@ final class Rectangle implements Element
 
     private function renderCorners(Buffer $buffer): void
     {
-        $angle = 135; // corner direction south-east
+        $angle = 45;
 
         foreach ([
             new Position(0, 0),
@@ -80,7 +80,7 @@ final class Rectangle implements Element
             $buffer->print($position, $this->brush->stroke(new Stroke(angle: $angle, intersection: true)));
         
             // rotate 90 degrees to next corner
-            $angle = abs($angle + 270) % 360;
+            $angle = abs($angle + 90) % 360;
         }
     }
 }

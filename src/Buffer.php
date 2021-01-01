@@ -56,7 +56,7 @@ class Buffer
             $this->clear = false;
         }
 
-        for ($y = 0; $y < $this->height; $y++) {
+        for ($y = $this->height - 1; $y >= 0; $y--) {
             $line = '';
 
             for ($x = 0; $x < $this->width; $x++) {
@@ -114,5 +114,15 @@ class Buffer
                 );
             }
         }
+    }
+
+    public function width(): int
+    {
+        return $this->width;
+    }
+
+    public function height(): int
+    {
+        return $this->height;
     }
 }

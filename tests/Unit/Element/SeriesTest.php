@@ -28,9 +28,9 @@ class SeriesTest extends ElementTestCase
                 0, 1, 2, 1, 0, 1, 2, 1, 0
             ], density: 5),
             <<<EOT
-█   █   █
- █ █ █ █ 
   █   █  
+ █ █ █ █ 
+█   █   █
 EOT
         ];
 
@@ -41,9 +41,9 @@ EOT
                 style: new Style(fg: Color::red())
             ),
             <<<EOT
-█   █   █
- █ █ █ █ 
   █   █  
+ █ █ █ █ 
+█   █   █
 EOT
         ];
     }

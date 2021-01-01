@@ -25,8 +25,8 @@ class ElementTestCase extends TestCase
         if ($expected !== $rendered) {
             self::fail(sprintf(
                 "Actual:\n---\n%s\n----\ndid not match expected:\n----\n%s\n----",
-                $rendered,
-                $expected,
+                str_replace(' ', '.', $rendered),
+                str_replace(' ', '.', $expected),
             ));
         }
         self::assertEquals($expected, $rendered);

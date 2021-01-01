@@ -31,7 +31,7 @@ final class Circle implements Element
             $x = $this->radius * sin(M_PI * 2 * $d / 360) + $this->radius;
             $y = $this->radius * cos(M_PI * 2 * $d / 360) + $this->radius;
 
-            $buffer->print(new Position($x, $y), $this->brush->stroke(new Stroke(angle: $d)));
+            $buffer->print(new Position($x, $y), $this->brush->stroke(new Stroke(angle: 360 - $d)));
         }
     }
 }

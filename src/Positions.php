@@ -18,6 +18,33 @@ class Positions implements IteratorAggregate
         }, $pairs));
     }
 
+    public function rowRanges(): PositionRanges
+    {
+        $rows = [];
+        foreach ($this->positions as $position) {
+            if (!isset($rows[(int)$position->y()])) {
+                $rows[$position->y()] = [];
+            }
+            $rows[$position->y()][] = $position->x();
+        }
+
+        $rows = array_map(function (array $series) {
+            sort($series);
+            return $series;
+        }, $rows);
+
+        $ranges = array_map(function (array $row, int $y) {
+            assert(!empty($row));
+            return new PositionRange(
+                new Position($row[array_key_first($row)], $y),
+                new Position($row[array_key_last($row)], $y),
+            );
+        }, $rows, array_keys($rows));
+
+        return new PositionRanges($ranges);
+
+    }
+
     public function getIterator()
     {
         return new ArrayIterator($this->positions);

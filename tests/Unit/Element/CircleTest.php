@@ -4,6 +4,7 @@ namespace DTL\ConsoleCanvas\Tests\Unit\Element;
 
 use DTL\ConsoleCanvas\Brush;
 use DTL\ConsoleCanvas\Brush\LineBrush;
+use DTL\ConsoleCanvas\Brush\RuneBrush;
 use DTL\ConsoleCanvas\Buffer;
 use DTL\ConsoleCanvas\Element;
 use DTL\ConsoleCanvas\Element\Circle;
@@ -37,6 +38,17 @@ class CircleTest extends ElementTestCase
 ██ ██
 █   █
 ██ ██
+ ███ 
+EOT
+        ];
+
+        yield 'filled' => [
+            new Circle(radius: 2, fillBrush: RuneBrush::fromChar('x')),
+            <<<EOT
+ ███ 
+██x██
+█xxx█
+██x██
  ███ 
 EOT
         ];

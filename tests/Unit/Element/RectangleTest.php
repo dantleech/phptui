@@ -40,29 +40,29 @@ EOT
         ];
 
         yield 'rectangle with border' => [
-            new Rectangle(width: 10, height: 2, brush: new LineBrush()),
+            new Rectangle(width: 10, height: 3, brush: new LineBrush()),
             <<<EOT
-┌─────────┐
-│         │
-└─────────┘
+┌────────┐
+│        │
+└────────┘
 EOT
         ];
 
         yield 'filled rectangle' => [
-            new Rectangle(width: 10, height: 2, fillBrush: new BlockBrush()),
+            new Rectangle(width: 10, height: 3, fillBrush: new BlockBrush()),
             <<<EOT
-███████████
-███████████
-███████████
+██████████
+██████████
+██████████
 EOT
         ];
 
         yield 'filled rectangle with fill brush' => [
-            new Rectangle(width: 10, height: 2, fillBrush: new BlockBrush(), brush: new LineBrush()),
+            new Rectangle(width: 10, height: 3, fillBrush: new BlockBrush(), brush: new LineBrush()),
             <<<EOT
-┌─────────┐
-│█████████│
-└─────────┘
+┌────────┐
+│████████│
+└────────┘
 EOT
         ];
     }

@@ -19,6 +19,7 @@ final class Rectangle implements Element
         public int $width,
         public int $height,
         ?Brush $brush = null,
+        private ?Style $style = null,
         private ?Brush $fillBrush = null,
         private ?Style $fillStyle = null,
     )
@@ -28,17 +29,20 @@ final class Rectangle implements Element
 
     public function render(Buffer $buffer): void
     {
-        //$this->renderFill($buffer);
+        $this->renderFill($buffer);
         $this->renderStroke($buffer);
-        //$this->renderCorners($buffer);
+        $this->renderCorners($buffer);
     }
 
     private function renderStroke(Buffer $buffer): void
     {
         $path = new Path(new Positions([
-            new Position(0, 0),
-            new Position(0, $this->height),
-        ]), brush: $this->brush);
+            new Position(1, 1),
+            new Position(1, $this->height),
+            new Position($this->width, $this->height),
+            new Position($this->width, 1),
+            new Position(1, 1),
+        ]), brush: $this->brush, style: $this->style);
         $path->render($buffer);
     }
 
@@ -54,8 +58,8 @@ final class Rectangle implements Element
 
         for ($y = 1; $y < $this->height; $y++) {
             $line = new Line(
-                new Position(0, $y),
-                new Position($this->width - 1, $y),
+                new Position(1, $y),
+                new Position($this->width, $y),
                 brush: $this->fillBrush,
                 style: $this->fillStyle
             );
@@ -68,10 +72,10 @@ final class Rectangle implements Element
         $angle = 45;
 
         foreach ([
-            new Position(0, 0),
-            new Position(0, $this->height),
+            new Position(1, 1),
+            new Position(1, $this->height),
             new Position($this->width, $this->height),
-            new Position($this->width, 0),
+            new Position($this->width, 1),
         ] as $index => $position) {
         
             $buffer->print($position, $this->brush->stroke(new Stroke(angle: $angle, intersection: true)));

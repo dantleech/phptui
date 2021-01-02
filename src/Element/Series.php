@@ -31,9 +31,14 @@ final class Series implements Element
     {
         $startY = null;
         $positions = [];
-        $x = 0;
+        $x = 1;
         foreach (array_values($this->values) as $y) {
-            $positions[] = Position::fromFloat($x, $y);
+            if ($y < 1) {
+                dump($y);
+                continue;
+            }
+
+            $positions[] = new Position($x, $y);
             $x += $this->step;
         }
 

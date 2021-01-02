@@ -57,6 +57,16 @@ EOT
 EOT
         ];
 
+        yield 'down' => [
+            new Line(new Position(1, 4), new Position(4, 1)),
+            <<<EOT
+╲...
+.╲..
+..╲.
+...╲
+EOT
+        ];
+
 
         yield 'diagonal 2' => [
             new Line(new Position(1, 1), new Position(2, 6), brush: new BlockBrush()),

@@ -36,7 +36,7 @@ final class Position
         if ($y < 1) {
             throw new RuntimeException(sprintf(
                 'Grid Y position cannot be < 1, got %s',
-                $x
+                $y
             ));
         }
     }

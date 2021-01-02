@@ -35,16 +35,28 @@ final class Container implements Element
         }
     }
 
-    public function update(Element $element, Closure $closure): void
+    public function updateClass(string $className, Closure $closure): void
     {
-        $closure($element);
+        foreach ($this->elements as [$position, $element]) {
+            if ($element instanceof $className) {
+                $closure($element);
+            }
+        }
     }
 
-    private function getElement(Element $element): Element
+    /**
+     * @param Closure(Position): Position $closure
+     */
+    public function move(Element $element, Closure $closure): void
+    {
+        $this->elements[spl_object_hash($element)] = [ $closure($this->getPosition($element)), $element ];
+    }
+
+    private function getPosition(Element $element): Position
     {
         $hash = spl_object_hash($element);
         if (array_key_exists($hash, $this->elements)) {
-            return $this->elements[$hash][1];
+            return $this->elements[$hash][0];
         }
 
         throw new RuntimeException(sprintf(

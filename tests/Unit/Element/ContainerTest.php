@@ -32,7 +32,7 @@ class ContainerTest extends ElementTestCase
         yield [
             function () {
                 $c = new Container(10, 10);
-                $c->place(new Position(0, 0), new Text('Hello'));
+                $c->place(new Position(1, 1), new Text('Hello'));
                 return $c;
             },
             <<<EOT
@@ -52,9 +52,9 @@ EOT
         yield 'respects container boundary' => [
             function () {
                 $c1 = new Container(10, 2);
-                $c2 = new Container(3, 2);
-                $c2->place(new Position(0, 0), new Text('Hello Hello Hello'));
-                $c1->place(new Position(0, 0), $c2);
+                $c2 = new Container(4, 2);
+                $c2->place(new Position(1, 1), new Text('Hello Hello Hello'));
+                $c1->place(new Position(1, 1), $c2);
                 return $c1;
             },
             <<<EOT
@@ -67,7 +67,7 @@ EOT
             function () {
                 $c1 = new Container(10, 2);
                 $element = new Text('Hello Hello Hello');
-                $c1->place(new Position(0, 0), $element);
+                $c1->place(new Position(1, 1), $element);
                 $c1->update($element, fn (Text $text) => $text->text = 'Goodbye');
                 return $c1;
             },

@@ -50,22 +50,19 @@ class Line implements Element
             self::nbPoints($this->start->x(), $this->end->x()),
             self::nbPoints($this->start->y(), $this->end->y()),
         );
+
         $xSeries = $this->series($this->start->x(), $this->end->x(), $nbPoints);
         $ySeries = $this->series($this->start->y(), $this->end->y(), $nbPoints);
 
         $lastX = null;
         $lastY = null;
 
-        $angle = -atan2(
-            $this->end->y() - $this->start->y(),
-            $this->end->x() - $this->start->x()
-        ) * 180 / M_PI;
-
+        $angle = $this->calculateAngle();
         foreach ($xSeries as $index => $x) {
             $y = $ySeries[$index];
 
             $buffer->print(
-                new Position($x, $y),
+                new Position(intval(round($x)), intval(round($y))),
                 $this->brush->stroke(new Stroke(angle: 360 - $angle)),
                 $this->style
             );
@@ -74,18 +71,37 @@ class Line implements Element
 
     private function series(int $start, int $end, int $nbPoints): array
     {
-        $delta = ($end - $start) / $nbPoints;
+        if ($nbPoints === 0) {
+            return [$start];
+        }
 
-        return array_reduce(range(1, $nbPoints), function (array $points, int $index) use ($start, $delta) {
-            $points[] = round(($start + ($delta * $index)));
-            return $points;
-        }, [$start]);
+        $delta = ($end - $start) / ($nbPoints);
+
+        $points =  array_reduce(
+            range(1, $nbPoints - 1),
+            function (array $points, int $index) use ($start, $delta) {
+                $points[] = ($start + ($delta * $index));
+                return $points;
+            },
+            [$start]
+        );
+
+        $points[] = $end;
+
+        return $points;
     }
 
     private static function nbPoints(int $n1, int $n2): int
     {
-        $start = min($n1, $n2);
-        $end = max($n1, $n2);
-        return ($end - $start) + 1;
+        return (max($n1, $n2) - min($n1, $n2));
+    }
+
+    private function calculateAngle(): int
+    {
+        $angle = -atan2(
+            $this->end->y() - $this->start->y(),
+            $this->end->x() - $this->start->x()
+        ) * 180 / M_PI;
+        return $angle;
     }
 }

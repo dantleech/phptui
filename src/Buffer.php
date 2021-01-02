@@ -56,7 +56,7 @@ class Buffer
             $this->clear = false;
         }
 
-        for ($y = $this->height - 1; $y > 0; $y--) {
+        for ($y = $this->height- 1; $y > 0; $y--) {
             $line = '';
 
             for ($x = 1; $x <= $this->width; $x++) {
@@ -109,7 +109,7 @@ class Buffer
         foreach ($buffer->grid as $y => $row) {
             foreach ($row as $x => $cell) {
                 $this->putCell(
-                    $position->withX($position->x() + $x)->withY($position->y() + $y),
+                    $position->withX($position->x() + $x - 1)->withY($position->y() + $y - 1),
                     $cell
                 );
             }

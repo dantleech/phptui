@@ -30,13 +30,13 @@ class PathTest extends ElementTestCase
     {
         yield [
             new Path(Positions::fromPairs([
-                [ 0, 0 ], [ 10, 0 ],
+                [ 1, 1 ], [ 10, 1 ],
             ]), brush: RuneBrush::fromChar('x')),
             'xxxxxxxxxx'
         ];
         yield [
             new Path(Positions::fromPairs([
-                [ 0, 0 ], [ 0, 4 ]
+                [ 1, 1 ], [ 1, 4 ]
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
 x
@@ -47,19 +47,29 @@ EOT
         ];
         yield 'diagnonal' => [
             new Path(Positions::fromPairs([
-                [ 0, 0 ], [ 4, 4 ]
+                [ 1, 1 ], [ 4, 4 ]
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
-....x
 ...x.
 ..x..
 .x...
 x....
 EOT
         ];
+        yield 'saw' => [
+            new Path(Positions::fromPairs([
+                [ 1, 1 ], [ 4, 4 ], [ 7, 1 ]
+            ]), brush: RuneBrush::fromChar('x')),
+            <<<EOT
+...x....
+..x.x...
+.x...x..
+x.....x.
+EOT
+        ];
         yield 'triangle' => [
             new Path(Positions::fromPairs([
-                [ 0, 0 ], [ 3, 0 ], [ 3, 3 ], [ 0, 0 ]
+                [ 1, 1 ], [ 4, 4 ], [ 4, 1 ], [ 1, 1 ]
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
 ...x.
@@ -71,11 +81,11 @@ EOT
 
         yield 'box' => [
             new Path(Positions::fromPairs([
-                [ 0, 0 ],
-                [ 0, 4 ],
-                [ 4, 4 ],
-                [ 4, 0 ],
-                [ 0, 0 ],
+                [ 1, 1 ],
+                [ 1, 5 ],
+                [ 5, 5 ],
+                [ 5, 1 ],
+                [ 1, 1 ],
             ]), brush: RuneBrush::fromChar('x')),
             <<<EOT
 xxxxx

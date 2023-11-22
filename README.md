@@ -1,6 +1,8 @@
 PHP TUI
 =======
 
+**ATTENTION**: I've since created a far more complete framework: https://github.com/php-tui/php-tui 
+
 This is a _in development_ TUI for PHP.
 
 ```php
